@@ -1,6 +1,6 @@
 import React from "react";
 
-function Statistics() {
+function ShowStatsPage() {
   return (
     <div className=" w-full h-screen">
       <div>
