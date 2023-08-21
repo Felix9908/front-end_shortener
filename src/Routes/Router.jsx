@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
-import Statistics from "../pages/Statistics";
+import Statistics from "../components/Statistics";
 import ShortLink from "../pages/ShortLink";
 
 function Router() {
