@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Header from "../components/Header";
+import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import Statistics from "../components/Statistics";
 import ShortLink from "../pages/ShortLink";
@@ -8,7 +8,7 @@ function Router() {
   return (
     <div>
       <BrowserRouter>
-        <Header />
+        <Navbar />
         <div className="flex">
           <Sidebar/>
           <Routes>

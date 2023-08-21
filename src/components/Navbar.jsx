@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Header() {
+function Navbar() {
   return (
     <div className='flex w-full h-10 bg-red-500'>
       <div><h4>Acortador</h4></div>
@@ -10,4 +10,4 @@ function Header() {
   )
 }
 
-export default Header
+export default Navbar
