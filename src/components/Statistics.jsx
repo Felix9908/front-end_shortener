@@ -1,5 +1,6 @@
 import React from "react";
 import {Card, Skeleton} from "@nextui-org/react";
+import MonthsDropdown from "./dropdowns/MonthsDropdown";
 
 function Statistics() {
   return (
@@ -8,20 +9,7 @@ function Statistics() {
         <h2 className="text-2xl p-5">Estadisticas</h2>
       </div>
       <div className="flex items-center flex-col justify-center p-5 w-full">
-        <select className="w-[200px] h-[40px] border">
-          <option>January</option>
-          <option>February</option>
-          <option>March</option>
-          <option>April</option>
-          <option>May</option>
-          <option>June</option>
-          <option>July</option>
-          <option>August</option>
-          <option>September</option>
-          <option>October</option>
-          <option>November</option>
-          <option>Desember</option>
-        </select>
+        <MonthsDropdown/>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-14 w-full bg-red-300">
         <div className="flex items-center flex-col bg-yellow-500 w-[250px] h-[150px] m-10">

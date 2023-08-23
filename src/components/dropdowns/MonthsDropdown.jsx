@@ -1,7 +1,7 @@
 import React from "react";
 import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button} from "@nextui-org/react";
 
-export default function App() {
+const MonthsDropdown = () =>  {
   const [selectedKeys, setSelectedKeys] = React.useState(new Set(["text"]));
 
   const selectedValue = React.useMemo(
@@ -36,3 +36,5 @@ export default function App() {
     </Dropdown>
   );
 }
+
+export default MonthsDropdown
