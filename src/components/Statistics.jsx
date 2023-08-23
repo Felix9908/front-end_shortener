@@ -1,6 +1,7 @@
 import React from "react";
 import {Card, Skeleton} from "@nextui-org/react";
 import MonthsDropdown from "./dropdowns/MonthsDropdown";
+import ModalWithBlur from "./modals/ModalWithBlur";
 
 function Statistics() {
   return (
@@ -35,6 +36,7 @@ function Statistics() {
       {/* Mensaje al cliente */}
       <div className="w-[1350px] p-10  m-10  border">
         <p>Informations</p>
+          <ModalWithBlur/>
       </div>
     </div>
   );
