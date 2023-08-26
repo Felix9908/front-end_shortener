@@ -1,8 +1,8 @@
 import React from "react";
 import {Card, Skeleton} from "@nextui-org/react";
-import MonthsDropdown from "./dropdowns/MonthsDropdown";
-import ModalWithBlur from "./modals/ModalWithBlur";
-import ImageWithSkeleton from "./images/ImageWithSkeleton";
+import MonthsDropdown from "../components/dropdowns/MonthsDropdown";
+import ModalWithBlur from "../components/modals/ModalWithBlur";
+import ImageWithSkeleton from "../components/images/ImageWithSkeleton";
 
 function Statistics() {
   return (
