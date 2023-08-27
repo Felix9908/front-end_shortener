@@ -1,18 +1,18 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import Sidebar from "../components/Sidebar";
+import Login from '../pages/login/Login'
 import Statistics from "../pages/Statistics";
 import ShortLink from "../pages/ShortLink";
+import CreateAcount from '../pages/login/CreateAcount'
 
 function Router() {
   return (
     <div>
       <BrowserRouter>
-        <Navbar />
         <div className="flex">
-          <Sidebar/>
           <Routes>
-            <Route path="/" element={<Statistics />} />
+            <Route path="/" element={<Login />} />
+            <Route path="/createAcount" element={<CreateAcount />} />
+            <Route path="/statistics" element={<Statistics />} />
             <Route path="/shortLink" element={<ShortLink />} />
           </Routes>
         </div>
