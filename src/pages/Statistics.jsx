@@ -3,10 +3,12 @@ import {Card, Skeleton} from "@nextui-org/react";
 import MonthsDropdown from "../components/dropdowns/MonthsDropdown";
 import ModalWithBlur from "../components/modals/ModalWithBlur";
 import ImageWithSkeleton from "../components/images/ImageWithSkeleton";
+import Navbar from "../components/Navbar";
 
 function Statistics() {
   return (
     <div className=" w-full h-screen">
+      <Navbar/>
       <div>
         <h2 className="text-2xl p-5">Estadisticas</h2>
       </div>

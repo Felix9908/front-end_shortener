@@ -1,9 +1,10 @@
 import React from "react";
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar } from "@nextui-org/react";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar } from "@nextui-org/react";
 import { ProfilePic } from "./common/ProfilePic.jsx";
 import {Switch} from "@nextui-org/react";
 import {MoonIcon} from "./common/MoonIcon";
 import {SunIcon} from "./common/SunIcon";
+import {Link} from 'react-router-dom'
 
 export default function App() {
     return (
@@ -15,17 +16,17 @@ export default function App() {
 
             <NavbarContent className="hidden sm:flex gap-4" justify="center">
                 <NavbarItem>
-                    <Link color="foreground" href="#">
+                    <Link color="foreground" to="#">
                         Inicio
                     </Link>
                 </NavbarItem>
                 <NavbarItem isActive>
-                    <Link href="#" aria-current="page" color="secondary">
+                    <Link to="#" aria-current="page" color="secondary">
                         Estadisticas
                     </Link>
                 </NavbarItem>
                 <NavbarItem>
-                    <Link color="foreground" href="#">
+                    <Link color="foreground" to="/shortLink">
                         Acortar
                     </Link>
                 </NavbarItem>

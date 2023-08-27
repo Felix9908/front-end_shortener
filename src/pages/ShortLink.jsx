@@ -1,9 +1,11 @@
-import React from 'react'
+import Navbar from "../components/Navbar";
 
 function ShortLink() {
   return (
-    <div>ShortLink</div>
-  )
+    <div>
+      <Navbar />
+    </div>
+  );
 }
 
-export default ShortLink
+export default ShortLink;
