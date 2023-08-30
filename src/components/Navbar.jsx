@@ -21,7 +21,7 @@ export default function App() {
                     </Link>
                 </NavbarItem>
                 <NavbarItem isActive>
-                    <Link to="#" aria-current="page" color="secondary">
+                    <Link to="/statistics" aria-current="page" color="secondary">
                         Estadisticas
                     </Link>
                 </NavbarItem>
