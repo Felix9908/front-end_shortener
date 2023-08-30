@@ -1,11 +1,19 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import LoginContext from "../../Context/LoginContext";
+import { useNavigate } from "react-router-dom"; 
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useContext(LoginContext);
+  const { login, logged } = useContext(LoginContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (logged == true) {
+      navigate("/statistics");
+    }
+  }, [logged]);
 
   const handleLogin = () => {
     login({username,password})
