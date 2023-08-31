@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import LoginContext from "../../Context/LoginContext";
+import {Button} from "@nextui-org/react";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -41,13 +42,13 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <button
-              type="button"
-              onClick={handleLogin}
-              className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-            >
+            
+            {/*  Para hacer que pare de cargar quitas el atributo isLoading, o sea, hay que
+            pasarle el atributo cuando se toca el boton de iniciar sesion, tambien hay que cambiar
+            el texo a iniciando sesion cuando se presione el boton */}
+            <Button color="primary" isLoading onClick={handleLogin} className="w-full py-2 px-4">
               Iniciar Sesión
-            </button>
+            </Button>
           </form>
           <div className="mt-4 text-sm text-gray-600">
             <p>
