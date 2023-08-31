@@ -1,7 +1,8 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import LoginContext from "../../Context/LoginContext";
-import {Button} from "@nextui-org/react";
+import {Button, Input} from "@nextui-org/react";
+import { MailIcon } from "../../assets/svg/MailIcon"
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -19,16 +20,20 @@ const Login = () => {
           <h2 className="text-2xl font-semibold mb-4">Iniciar Sesión</h2>
           <form>
             <div className="mb-4">
-              <label htmlFor="username" className="block mb-1">
-                Nombre de Usuario:
-              </label>
-              <input
-                type="text"
-                id="username"
-                className="w-full p-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
+           {/*  Aqui es basicamente lo mismo, en caso que se detecte un inicio de sesion no valido
+            lo que hay que hacer es cambiar el validationState="invalid" y se pone en rojo */}
+            <Input
+              type="email"
+              label="Email"
+              validationState="valid"
+              placeholder="jhondoe@gmail.com"
+              labelPlacement="outside"
+              startContent={
+                <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+          }
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
             </div>
             <div className="mb-4">
               <label htmlFor="password" className="block mb-1">
@@ -46,7 +51,7 @@ const Login = () => {
             {/*  Para hacer que pare de cargar quitas el atributo isLoading, o sea, hay que
             pasarle el atributo cuando se toca el boton de iniciar sesion, tambien hay que cambiar
             el texo a iniciando sesion cuando se presione el boton */}
-            <Button color="primary" isLoading onClick={handleLogin} className="w-full py-2 px-4">
+            <Button color="primary" onClick={handleLogin} className="w-full py-2 px-4">
               Iniciar Sesión
             </Button>
           </form>
