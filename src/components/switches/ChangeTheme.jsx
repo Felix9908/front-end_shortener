@@ -1,7 +1,7 @@
 import React from "react";
 import {Switch} from "@nextui-org/react";
-import {MoonIcon} from "../common/MoonIcon";
-import {SunIcon} from "../common/SunIcon";
+import {MoonIcon} from "../../assets/svg/MoonIcon.jsx";
+import {SunIcon} from "../../assets/svg/SunIcon";
 
 export default function ChangeTheme() {
   return (

@@ -1,9 +1,9 @@
 import React from "react";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar } from "@nextui-org/react";
-import { ProfilePic } from "./common/ProfilePic.jsx";
+import { ProfilePic } from "../assets/svg/ProfilePic.jsx";
 import {Switch} from "@nextui-org/react";
-import {MoonIcon} from "./common/MoonIcon";
-import {SunIcon} from "./common/SunIcon";
+import {MoonIcon} from "../assets/svg/MoonIcon.jsx";
+import {SunIcon} from "../assets/svg/SunIcon.jsx";
 import {Link} from 'react-router-dom'
 
 export default function App() {
