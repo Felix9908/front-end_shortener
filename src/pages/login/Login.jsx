@@ -2,6 +2,8 @@ import { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import LoginContext from "../../Context/LoginContext";
 import {Button, Input} from "@nextui-org/react";
+import { EyeSlashed } from "../../assets/svg/EyeSlashed"
+import { Eye } from "../../assets/svg/Eye"
 import { MailIcon } from "../../assets/svg/MailIcon"
 import { useNavigate } from "react-router-dom"; 
 
@@ -38,19 +40,32 @@ const Login = () => {
               labelPlacement="outside"
               startContent={
                 <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-          }
+              }
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
             </div>
+
+            {/* TODO, aqui queda por hacer que el boton de mostrar contraseña funcione, esta pero no esta
+            funcional del todo
+            OJO NO DESCOMENTAR LAS LINEAS DE ABAJO
+            */}
             <div className="mb-4">
-              <label htmlFor="password" className="block mb-1">
-                Contraseña:
-              </label>
-              <input
+              <Input
                 type="password"
-                id="password"
-                className="w-full p-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
+                label="Contraseña"
+                validationState="valid"
+                placeholder="Escribe tu contraseña"
+                labelPlacement="outside"
+                /* startContent={
+                  <button className="focus:outline-none" type="button" onClick={alert("POR IMPLEMENTAR")}>
+                    {isVisible ? (
+                      <EyeSlashed className="text-2xl text-default-400 pointer-events-none" />
+                    ) : (
+                      <Eye className="text-2xl text-default-400 pointer-events-none" />
+                    )}
+                  </button>
+                } */
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
