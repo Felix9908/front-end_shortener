@@ -13,6 +13,6 @@ export default {
   darkMode: "class",
   plugins: [nextui(), require("daisyui")],
   daisyui: {
-    themes: [],
+    themes: ["light"],
   }
 }
