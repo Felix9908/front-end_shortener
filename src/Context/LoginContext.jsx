@@ -25,6 +25,22 @@ export const LoginProvider = ({ children }) => {
     }
   };
 
+  const createAccount = async ({ user, email, password, privUser }) => {
+    console.log({ user, email, password, privUser })
+    try {
+      await axios
+        .post("http://localhost:3000/createAccount", {
+          user,
+          email,
+          password,
+          privUser,
+        })
+        .then((res) => {
+          console.log(res);
+        });
+    } catch (err) {}
+  };
+
   useEffect(() => {
     const token = sessionStorage.getItem("token");
     if (token) {
@@ -37,6 +53,7 @@ export const LoginProvider = ({ children }) => {
       value={{
         login,
         logged,
+        createAccount,
       }}
     >
       {children}
