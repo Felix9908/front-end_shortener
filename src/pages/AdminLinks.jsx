@@ -3,7 +3,7 @@ import CardsLinks from "../components/CardsLinks"; // Importar sin llaves
 
 function AdminLinks() {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 w-full">
       <Navbar />
       <div className="container mx-auto p-6">
         <h1 className="text-3xl font-semibold mb-6 text-center">
@@ -38,6 +38,7 @@ function AdminLinks() {
 
         {/* Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <CardsLinks />
           <CardsLinks />
           <CardsLinks />
           <CardsLinks />
