@@ -2,7 +2,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from '../pages/login/Login'
 import Statistics from "../pages/Statistics";
 import ShortLink from "../pages/ShortLink";
-import CreateAcount from '../pages/login/CreateAcount'
+import CreateAcount from '../pages/login/CreateAcount';
+import UserManagement from '../pages/UserManagement'
 
 function Router() {
   return (
@@ -14,6 +15,7 @@ function Router() {
             <Route path="/createAcount" element={<CreateAcount />} />
             <Route path="/statistics" element={<Statistics />} />
             <Route path="/shortLink" element={<ShortLink />} />
+            <Route path="/userManagement" element={<UserManagement />} />
           </Routes>
         </div>
       </BrowserRouter>
