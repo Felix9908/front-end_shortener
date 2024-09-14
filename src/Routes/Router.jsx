@@ -4,6 +4,7 @@ import Statistics from "../pages/Statistics";
 import ShortLink from "../pages/ShortLink";
 import CreateAcount from '../pages/login/CreateAcount'
 import AdminLinks from "../pages/AdminLinks";
+import FormProfile from "../pages/FormProfile";
 
 function Router() {
   return (
@@ -16,6 +17,7 @@ function Router() {
             <Route path="/statistics" element={<Statistics />} />
             <Route path="/shortLink" element={<ShortLink />} />
             <Route path="/AdminLinks" element={<AdminLinks />} />
+            <Route path="/FormProfile" element={<FormProfile />} />
           </Routes>
         </div>
       </BrowserRouter>

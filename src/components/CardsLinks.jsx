@@ -69,7 +69,7 @@ function CardsLinks() {
         />
         <button
           onClick={handleCopy}
-          className="bg-gray-500 text-white p-2 rounded-lg hover:bg-gray-600 flex items-center justify-center"
+          className="bg-[#7828c8] text-white p-2 rounded-lg hover:bg-[#7828c8e1] flex items-center justify-center"
         >
           {copied ? <RiCheckLine /> : <RiFileCopyLine />}
         </button>
