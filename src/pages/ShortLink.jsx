@@ -2,7 +2,7 @@ import Navbar from "../components/Navbar";
 
 function ShortLink() {
   return (
-    <div>
+    <div className="w-full h-screen">
       <Navbar />
     </div>
   );

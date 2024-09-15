@@ -5,6 +5,8 @@ import ShortLink from "../pages/ShortLink";
 import CreateAcount from '../pages/login/CreateAcount'
 import AdminLinks from "../pages/AdminLinks";
 import FormProfile from "../pages/FormProfile";
+import CreateAcount from '../pages/login/CreateAcount';
+import UserManagement from '../pages/UserManagement'
 
 function Router() {
   return (
@@ -18,6 +20,7 @@ function Router() {
             <Route path="/shortLink" element={<ShortLink />} />
             <Route path="/AdminLinks" element={<AdminLinks />} />
             <Route path="/FormProfile" element={<FormProfile />} />
+            <Route path="/userManagement" element={<UserManagement />} />
           </Routes>
         </div>
       </BrowserRouter>
