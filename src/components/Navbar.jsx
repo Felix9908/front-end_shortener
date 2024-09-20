@@ -18,7 +18,7 @@ export default function NavbarComponent() {
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <Link color="foreground" to="#">
+          <Link color="foreground" to="/AdminLinks">
             Noticas acortadas
           </Link>
         </NavbarItem>
