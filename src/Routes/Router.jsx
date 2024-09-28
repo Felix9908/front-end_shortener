@@ -4,7 +4,7 @@ import Statistics from "../pages/Statistics";
 import ShortLink from "../pages/ShortLink";
 import AdminLinks from "../pages/AdminLinks";
 import FormProfile from "../pages/FormProfile";
-import CreateAcount from '../pages/login/CreateAcount';
+import CreateAccount from '../pages/login/CreateAccount';
 import UserManagement from '../pages/UserManagement';
 import ProtectedRoute from "./ProtectedRoutes"; 
 
@@ -15,7 +15,7 @@ function Router() {
         <div className="flex">
           <Routes>
             <Route path="/" element={<Login />} />
-            <Route path="/createAcount" element={<CreateAcount />} />
+            <Route path="/createAcount" element={<CreateAccount />} />
 
             {/* Rutas protegidas */}
             <Route
