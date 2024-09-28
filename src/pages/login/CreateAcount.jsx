@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 import { Button, Input } from "@nextui-org/react";
 import { EyeSlashed } from "../../assets/svg/EyeSlashed";
 import { Eye } from "../../assets/svg/Eye";
@@ -13,10 +14,28 @@ const CreateAccount = () => {
   const [isConfirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const navigate = useNavigate();
 
-  const onSubmit = (data) => {
+  const password = watch("password");
+
+  const onSubmit = async (data) => {
+    const { username, email, password } = data;
+    const apiUrl = import.meta.env.VITE_API_URL;
+
     console.log(data);
-    // Aquí puedes manejar el registro de la cuenta
-    navigate("/statistics"); // Redirige al usuario después de crear la cuenta
+    console.log(apiUrl);
+
+    try {
+      const response = await axios.post(`${apiUrl}/createAccount`, {
+        user: username,
+        email: email,
+        password: password,
+      });
+
+      if (response.status === 200) {
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("Error al crear la cuenta:", error);
+    }
   };
 
   return (
@@ -25,6 +44,7 @@ const CreateAccount = () => {
         <div className="bg-white p-8 rounded-lg shadow-md w-full sm:w-96">
           <h2 className="text-2xl font-semibold mb-4">Crear Cuenta</h2>
           <form onSubmit={handleSubmit(onSubmit)}>
+            {/* Nombre de usuario */}
             <div className="mb-4">
               <Input
                 label="Nombre de Usuario"
@@ -36,15 +56,14 @@ const CreateAccount = () => {
               />
             </div>
 
+            {/* Correo electrónico */}
             <div className="mb-4">
               <Input
                 type="email"
                 label="Correo Electrónico"
                 placeholder="jhondoe@gmail.com"
                 labelPlacement="outside"
-                startContent={
-                  <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-                }
+                startContent={<MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />}
                 validationState={errors.email ? "invalid" : "valid"}
                 {...register("email", {
                   required: "Este campo es obligatorio",
@@ -57,26 +76,17 @@ const CreateAccount = () => {
               />
             </div>
 
+            {/* Contraseña */}
             <div className="mb-4">
               <Input
                 type={isPasswordVisible ? "text" : "password"}
                 label="Contraseña"
                 placeholder="Escribe tu contraseña"
                 labelPlacement="outside"
-                startContent={
-                  <PasswordIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0 w-7" />
-                }
+                startContent={<PasswordIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0 w-7" />}
                 endContent={
-                  <button
-                    type="button"
-                    onClick={() => setPasswordVisible(!isPasswordVisible)}
-                    className="focus:outline-none"
-                  >
-                    {isPasswordVisible ? (
-                      <Eye className="text-2xl text-default-400" />
-                    ) : (
-                      <EyeSlashed className="text-2xl text-default-400" />
-                    )}
+                  <button type="button" onClick={() => setPasswordVisible(!isPasswordVisible)} className="focus:outline-none">
+                    {isPasswordVisible ? <Eye className="text-2xl text-default-400" /> : <EyeSlashed className="text-2xl text-default-400" />}
                   </button>
                 }
                 validationState={errors.password ? "invalid" : "valid"}
@@ -88,42 +98,35 @@ const CreateAccount = () => {
               />
             </div>
 
+            {/* Confirmar contraseña */}
             <div className="mb-4">
               <Input
                 type={isConfirmPasswordVisible ? "text" : "password"}
                 label="Confirmar Contraseña"
                 placeholder="Escribe nuevamente tu contraseña"
                 labelPlacement="outside"
-                startContent={
-                  <PasswordIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0 w-7" />
-                }
+                startContent={<PasswordIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0 w-7" />}
                 endContent={
-                  <button
-                    type="button"
-                    onClick={() => setConfirmPasswordVisible(!isConfirmPasswordVisible)}
-                    className="focus:outline-none"
-                  >
-                    {isConfirmPasswordVisible ? (
-                      <Eye className="text-2xl text-default-400" />
-                    ) : (
-                      <EyeSlashed className="text-2xl text-default-400" />
-                    )}
+                  <button type="button" onClick={() => setConfirmPasswordVisible(!isConfirmPasswordVisible)} className="focus:outline-none">
+                    {isConfirmPasswordVisible ? <Eye className="text-2xl text-default-400" /> : <EyeSlashed className="text-2xl text-default-400" />}
                   </button>
                 }
                 validationState={errors.confirmPassword ? "invalid" : "valid"}
                 {...register("confirmPassword", {
                   required: "Este campo es obligatorio",
-                  validate: (value) => value === watch("password") || "Las contraseñas no coinciden",
+                  validate: (value) => value === password || "Las contraseñas no coinciden",
                 })}
                 helperText={errors.confirmPassword && errors.confirmPassword.message}
               />
             </div>
 
+            {/* Botón para crear cuenta */}
             <Button color="primary" type="submit" className="w-full py-2 px-4">
               Crear Cuenta
             </Button>
           </form>
 
+          {/* Enlace para iniciar sesión */}
           <div className="mt-4 text-sm text-gray-600">
             <p>
               ¿Ya tienes una cuenta?{" "}
