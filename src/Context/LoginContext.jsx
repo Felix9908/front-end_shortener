@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useCallback } from "react";
+import PropTypes from "prop-types";
 import axios from "axios";
 
 const LoginContext = createContext();
@@ -6,16 +7,18 @@ const LoginContext = createContext();
 export const LoginProvider = ({ children }) => {
   const [logged, setLogged] = useState(false);
 
-  const login = async ({ username, password }) => {
+  const apiUrl = import.meta.env.VITE_API_URL;
+
+  const login = useCallback(async ({ username, password }) => {
     try {
       await axios
-        .post("http://localhost:3000/login", { username, password })
+        .post(`${apiUrl}/login`, { username, password })
         .then((res) => {
           console.log(res.data.msg);
-          if (res.data.msg == "AUTEMTICACION EXITOSA") {
+          if (res.data.msg === "AUTENTICACION EXITOSA") {
             setLogged(true);
-            sessionStorage.setItem("token", res.data.token);
-            sessionStorage.setItem("priv", res.data.userData[0].Priv);
+            localStorage.setItem("token", res.data.token);
+            localStorage.setItem("priv", res.data.userData[0].Priv);
           } else {
             console.log("error");
           }
@@ -23,13 +26,12 @@ export const LoginProvider = ({ children }) => {
     } catch (err) {
       console.log(err);
     }
-  };
+  }, [apiUrl]);
 
   const createAccount = async ({ user, email, password, privUser }) => {
-    console.log({ user, email, password, privUser })
     try {
       await axios
-        .post("http://localhost:3000/createAccount", {
+        .post(`${apiUrl}/createAccount`, { 
           user,
           email,
           password,
@@ -38,15 +40,17 @@ export const LoginProvider = ({ children }) => {
         .then((res) => {
           console.log(res);
         });
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("token");
     if (token) {
       setLogged(true);
     }
-  }, [login]);
+  }, [login]); 
 
   return (
     <LoginContext.Provider
@@ -59,6 +63,11 @@ export const LoginProvider = ({ children }) => {
       {children}
     </LoginContext.Provider>
   );
+};
+
+// Define PropTypes for the component
+LoginProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default LoginContext;

@@ -1,10 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Login from '../pages/login/Login'
+import Login from '../pages/login/Login';
 import Statistics from "../pages/Statistics";
 import ShortLink from "../pages/ShortLink";
-import CreateAcount from '../pages/login/CreateAcount'
 import AdminLinks from "../pages/AdminLinks";
 import FormProfile from "../pages/FormProfile";
+import CreateAccount from '../pages/login/CreateAccount';
+import UserManagement from '../pages/UserManagement';
+import ProtectedRoute from "./ProtectedRoutes"; 
 
 function Router() {
   return (
@@ -13,11 +15,49 @@ function Router() {
         <div className="flex">
           <Routes>
             <Route path="/" element={<Login />} />
-            <Route path="/createAcount" element={<CreateAcount />} />
-            <Route path="/statistics" element={<Statistics />} />
-            <Route path="/shortLink" element={<ShortLink />} />
-            <Route path="/AdminLinks" element={<AdminLinks />} />
-            <Route path="/FormProfile" element={<FormProfile />} />
+            <Route path="/createAcount" element={<CreateAccount />} />
+
+            {/* Rutas protegidas */}
+            <Route
+              path="/statistics"
+              element={
+                <ProtectedRoute>
+                  <Statistics />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/shortLink"
+              element={
+                <ProtectedRoute>
+                  <ShortLink />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/AdminLinks"
+              element={
+                <ProtectedRoute>
+                  <AdminLinks />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/FormProfile"
+              element={
+                <ProtectedRoute>
+                  <FormProfile />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/userManagement"
+              element={
+                <ProtectedRoute>
+                  <UserManagement />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </div>
       </BrowserRouter>

@@ -1,26 +1,35 @@
-import { useState, useContext, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import LoginContext from "../../Context/LoginContext";
-import { Button, Input, Popover, PopoverTrigger, PopoverContent, Tooltip } from "@nextui-org/react";
-import { EyeSlashed } from "../../assets/svg/EyeSlashed"
-import { Eye } from "../../assets/svg/Eye"
-import { MailIcon } from "../../assets/svg/MailIcon"
+import { useForm } from "react-hook-form"; // Importa react-hook-form
+import axios from "axios"; // Importa axios
+import { Button, Input } from "@nextui-org/react";
+import { EyeSlashed } from "../../assets/svg/EyeSlashed";
+import { Eye } from "../../assets/svg/Eye";
+import { MailIcon } from "../../assets/svg/MailIcon";
+import { PasswordIcon } from "../../assets/svg/PasswordIcon";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const { login, logged } = useContext(LoginContext);
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const [isPasswordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
+  const apiUrl = import.meta.env.VITE_API_URL;
+  
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.post(`${apiUrl}/login`, data);
 
-  useEffect(() => {
-    if (logged == true) {
-      navigate("/statistics");
+      if (response.data.success) {
+
+        localStorage.setItem("token", response.data.token);
+
+        navigate("/statistics");
+      } else {
+        console.log(response.data.msg);
+      }
+    } catch (error) {
+      console.error("Error en la autenticación:", error);
     }
-  }, [logged]);
-
-  const handleLogin = () => {
-    login({ username, password })
   };
 
   return (
@@ -28,65 +37,58 @@ const Login = () => {
       <div className="flex items-center justify-center h-screen bg-gray-100">
         <div className="bg-white p-8 rounded-lg shadow-md w-full sm:w-96">
           <h2 className="text-2xl font-semibold mb-4">Iniciar Sesión</h2>
-          <form>
-            <div className="mb-4">
-              {/*  Aqui es basicamente lo mismo, en caso que se detecte un inicio de sesion no valido
-            lo que hay que hacer es cambiar el validationState="invalid" y se pone en rojo */}
-                <Input
-                  type="email"
-                  label="Email"
-                  validationState="valid"
-                  placeholder="jhondoe@gmail.com"
-                  labelPlacement="outside"
-                  startContent={
-                    <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-                  }
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-
-            </div>
-
-            {/* TODO, aqui queda por hacer que el boton de mostrar contraseña funcione, esta pero no esta
-            funcional del todo
-            OJO NO DESCOMENTAR LAS LINEAS DE ABAJO
-            */}
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-4">
               <Input
-                type="password"
-                label="Contraseña"
-                validationState="valid"
-                placeholder="Escribe tu contraseña"
+                type="text"
+                label="UserName"
+                validationState={errors.username ? "invalid" : "valid"}
+                placeholder="jhondoe@gmail.com"
                 labelPlacement="outside"
-                /* startContent={
-                  <button className="focus:outline-none" type="button" onClick={alert("POR IMPLEMENTAR")}>
-                    {isVisible ? (
-                      <EyeSlashed className="text-2xl text-default-400 pointer-events-none" />
-                    ) : (
-                      <Eye className="text-2xl text-default-400 pointer-events-none" />
-                    )}
-                  </button>
-                } */
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                startContent={
+                  <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                }
+                {...register("username", { required: "El nombre de usuaruio es requerido" })} // Usa react-hook-form
               />
+              {errors.username && <span className="text-red-500">{errors.username.message}</span>}
             </div>
 
-            {/*  Para hacer que pare de cargar quitas el atributo isLoading, o sea, hay que
-            pasarle el atributo cuando se toca el boton de iniciar sesion, tambien hay que cambiar
-            el texo a iniciando sesion cuando se presione el boton */}
-            <Button color="primary" onClick={handleLogin} className="w-full py-2 px-4">
+            <div className="mb-4">
+              <Input
+                type={isPasswordVisible ? "text" : "password"}
+                label="Contraseña"
+                validationState={errors.password ? "invalid" : "valid"}
+                placeholder="Escribe tu contraseña"
+                labelPlacement="outside"
+                startContent={
+                  <PasswordIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0 w-7" />
+                }
+                endContent={
+                  <button
+                    type="button"
+                    onClick={() => setPasswordVisible(!isPasswordVisible)}
+                    className="focus:outline-none"
+                  >
+                    {isPasswordVisible ? (
+                      <Eye className="text-2xl text-default-400" />
+                    ) : (
+                      <EyeSlashed className="text-2xl text-default-400" />
+                    )}
+                  </button>
+                }
+                {...register("password", { required: "La contraseña es requerida" })} 
+              />
+              {errors.password && <span className="text-red-500">{errors.password.message}</span>}
+            </div>
+
+            <Button type="submit" color="primary" className="w-full py-2 px-4">
               Iniciar Sesión
             </Button>
-
           </form>
 
           <div className="mt-4 text-sm text-gray-600">
             <p>
-              <Link
-                to="/createAcount"
-                className="text-blue-500 hover:underline"
-              >
+              <Link to="/createAcount" className="text-blue-500 hover:underline">
                 Crear una nueva cuenta
               </Link>
             </p>
