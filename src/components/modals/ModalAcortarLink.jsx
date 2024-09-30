@@ -1,16 +1,22 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button } from "@nextui-org/react";
+import { Modal, ModalContent, ModalHeader, ModalBody, Button } from "@nextui-org/react";
 import ModalContext from "../../Context/ModalContext";
+import api from "../../api/axios";
 
 const ModalAcortarLink = () => {
   const { isOpen, backdrop, onClose } = useContext(ModalContext);
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
-  const onSubmit = (data) => {
-    // Lógica para manejar el acortamiento del link
-    console.log(data);
-    onClose(); // Cerrar el modal después de enviar
+  const onSubmit = async (data) => {
+    try {
+      const response = await api.post('/shorten', data);
+      console.log(response.data);  
+      reset();  
+      onClose();  
+    } catch (error) {
+      console.error("Error al acortar el link", error);
+    }
   };
 
   return (
@@ -31,10 +37,10 @@ const ModalAcortarLink = () => {
                     type="url"
                     className="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                     placeholder="https://example.com"
-                    {...register("originalLink", { required: "El link original es requerido" })}
+                    {...register("originalUrl", { required: "El link original es requerido" })}
                   />
-                  {errors.originalLink && (
-                    <span className="text-red-500 text-sm">{errors.originalLink.message}</span>
+                  {errors.originalUrl && (
+                    <span className="text-red-500 text-sm">{errors.originalUrl.message}</span>
                   )}
                 </div>
 
@@ -46,10 +52,10 @@ const ModalAcortarLink = () => {
                     className="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                     placeholder="Escribe el enunciado aquí (puedes usar emojis 😊)"
                     rows={3}
-                    {...register("announcementText", { required: "El enunciado es requerido" })}
+                    {...register("description", { required: "El enunciado es requerido" })}
                   />
-                  {errors.announcementText && (
-                    <span className="text-red-500 text-sm">{errors.announcementText.message}</span>
+                  {errors.description && (
+                    <span className="text-red-500 text-sm">{errors.description.message}</span>
                   )}
                 </div>
 
@@ -90,27 +96,17 @@ const ModalAcortarLink = () => {
                   )}
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Alias
-                  </label>
-                  <input
-                    type="text"
-                    className="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                    placeholder="Alias personalizado (opcional)"
-                    {...register("alias")}
-                  />
+                {/* Botón de envío dentro del formulario */}
+                <div className="flex justify-end space-x-2">
+                  <Button color="danger" variant="light" onPress={onClose}>
+                    Cancelar
+                  </Button>
+                  <Button color="primary" type="submit">
+                    Acortar Link
+                  </Button>
                 </div>
               </form>
             </ModalBody>
-            <ModalFooter className="flex justify-end space-x-2">
-              <Button color="danger" variant="light" onPress={onClose}>
-                Cancelar
-              </Button>
-              <Button color="primary" onPress={handleSubmit(onSubmit)}>
-                Acortar Link
-              </Button>
-            </ModalFooter>
           </>
         )}
       </ModalContent>

@@ -7,6 +7,7 @@ import FormProfile from "../pages/FormProfile";
 import CreateAccount from '../pages/login/CreateAccount';
 import UserManagement from '../pages/UserManagement';
 import ProtectedRoute from "./ProtectedRoutes"; 
+import AdPage from "../pages/AdPage";
 
 function Router() {
   return (
@@ -16,7 +17,8 @@ function Router() {
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/createAcount" element={<CreateAccount />} />
-
+            <Route path="/:shortCode" element={<AdPage />} />
+            
             {/* Rutas protegidas */}
             <Route
               path="/statistics"

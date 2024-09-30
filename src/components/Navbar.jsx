@@ -13,7 +13,7 @@ export default function NavbarComponent() {
     <Navbar>
       <NavbarBrand>
         <ProfilePic />
-        <p className="font-bold text-inherit">NotiExpress</p> {/* TODO AGREGAR SOPORTE PARA LENGUAJE */}
+        <p className="font-bold text-inherit">NotiExpress</p>
       </NavbarBrand>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
