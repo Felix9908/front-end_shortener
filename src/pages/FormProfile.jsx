@@ -1,15 +1,16 @@
 import Navbar from "../components/Navbar";
 import { useForm } from "react-hook-form";
 import { RiSendPlaneFill } from "react-icons/ri";
+import api from '../api/axios'
 
 const FormProfile = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post('https://your-api-endpoint.com/profile', data); // cambiar el link para enlazar con la base de datos 
+      const response = await api.put('/updateUserDetails', data);
+      console.log(response)
 
-      // Manejo de diferentes códigos de respuesta
       switch (response.status) {
         case 200:
           alert("Form submitted successfully: OK (200)");
@@ -23,6 +24,7 @@ const FormProfile = () => {
     } catch (error) {
       // Manejo de errores por códigos de estado HTTP
       if (error.response) {
+        console.log(error)
         switch (error.response.status) {
           case 400:
             alert("Bad Request (400)");
@@ -34,7 +36,7 @@ const FormProfile = () => {
             alert("Internal Server Error (500)");
             break;
           default:
-            alert(`Unexpected error: ${error.response.status}`);
+            alert(`Unexpected error: ${error.response.status} `);
         }
       } else {
         alert("Network Error or Server not reachable");
@@ -51,33 +53,23 @@ const FormProfile = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-6 rounded-lg shadow-md">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700">First Name</label>
+              <label className="block text-sm font-medium text-gray-700">full_name</label>
               <input
-                {...register('firstName', { required: true })}
-                placeholder="Enter your first name"
+                {...register('full_name', { required: true })}
+                placeholder="Enter your full_name"
                 className="mt-1 p-2 border border-gray-300 rounded-lg w-full"
               />
-              {errors.firstName && <span className="text-red-500 text-sm">First name is required</span>}
+              {errors.full_name && <span className="text-red-500 text-sm">full_name is required</span>}
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">Last Name</label>
+              <label className="block text-sm font-medium text-gray-700">address1</label>
               <input
-                {...register('lastName', { required: true })}
-                placeholder="Enter your last name"
+                {...register('address1', { required: true })}
+                placeholder="Enter your address1"
                 className="mt-1 p-2 border border-gray-300 rounded-lg w-full"
               />
-              {errors.lastName && <span className="text-red-500 text-sm">Last name is required</span>}
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Address</label>
-              <input
-                {...register('address', { required: true })}
-                placeholder="Enter your address"
-                className="mt-1 p-2 border border-gray-300 rounded-lg w-full"
-              />
-              {errors.address && <span className="text-red-500 text-sm">Address is required</span>}
+              {errors.address1 && <span className="text-red-500 text-sm">address1 is required</span>}
             </div>
 
             <div>
@@ -140,25 +132,25 @@ const FormProfile = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Withdrawal Method</label>
+              <label className="block text-sm font-medium text-gray-700">withdrawal_method</label>
               <select
-                {...register('withdrawalMethod', { required: true })}
+                {...register('withdrawal_method', { required: true })}
                 className="mt-1 p-2 border border-gray-300 rounded-lg w-full"
               >
                 <option value="MLC card">MLC card</option>
                 <option value="CUP card">CUP card</option>
               </select>
-              {errors.withdrawalMethod && <span className="text-red-500 text-sm">Withdrawal method is required</span>}
+              {errors.withdrawal_method && <span className="text-red-500 text-sm">withdrawal_method is required</span>}
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">Withdrawal Account</label>
+              <label className="block text-sm font-medium text-gray-700">withdrawal_account</label>
               <input
-                {...register('withdrawalAccount', { required: true })}
-                placeholder="Enter your withdrawal account"
+                {...register('withdrawal_account', { required: true })}
+                placeholder="Enter your withdrawal_account"
                 className="mt-1 p-2 border border-gray-300 rounded-lg w-full"
               />
-              {errors.withdrawalAccount && <span className="text-red-500 text-sm">Withdrawal account is required</span>}
+              {errors.withdrawal_account && <span className="text-red-500 text-sm">withdrawal_account is required</span>}
             </div>
           </div>
 
