@@ -1,13 +1,24 @@
 import { useContext } from "react";
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar, Switch } from "@nextui-org/react";
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  DropdownItem,
+  DropdownTrigger,
+  Dropdown,
+  DropdownMenu,
+  Avatar,
+  Switch,
+} from "@nextui-org/react";
 import { ProfilePic } from "../assets/svg/ProfilePic.jsx";
 import { MoonIcon } from "../assets/svg/MoonIcon.jsx";
 import { SunIcon } from "../assets/svg/SunIcon.jsx";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import ModalContext from "../Context/ModalContext.jsx";
 
 export default function NavbarComponent() {
-  const { onOpen } = useContext(ModalContext); 
+  const { onOpen } = useContext(ModalContext);
 
   return (
     <Navbar>
@@ -28,7 +39,9 @@ export default function NavbarComponent() {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <button color="foreground" onClick={() => onOpen()}> {/* Aquí llamamos a la función para abrir el modal */}
+          <button color="foreground" onClick={() => onOpen()}>
+            {" "}
+            {/* Aquí llamamos a la función para abrir el modal */}
             Acortar
           </button>
         </NavbarItem>
@@ -41,9 +54,13 @@ export default function NavbarComponent() {
             size="lg"
             color="secondary"
             thumbIcon={({ isSelected, className }) =>
-              isSelected ? (<SunIcon className={className} />) : (<MoonIcon className={className} />)
-            }>
-          </Switch>
+              isSelected ? (
+                <SunIcon className={className} />
+              ) : (
+                <MoonIcon className={className} />
+              )
+            }
+          ></Switch>
         </NavbarItem>
       </NavbarContent>
 
@@ -65,10 +82,8 @@ export default function NavbarComponent() {
               <p className="font-semibold">Bienvenido</p>
               <p className="font-semibold">Jhon Doe</p>
             </DropdownItem>
-            <DropdownItem key="settings">Configurar perfil</DropdownItem>
-            <DropdownItem key="team_settings">Mi equipo</DropdownItem>
-            <DropdownItem key="analytics">Mis Analíticas</DropdownItem>
             <DropdownItem key="system">Analíticas Globales</DropdownItem>
+            <DropdownItem key="settings">Configurar perfil</DropdownItem>
             <DropdownItem key="help_and_feedback">Ayuda</DropdownItem>
             <DropdownItem key="logout" color="danger">
               Cerrar sesión
