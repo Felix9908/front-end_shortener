@@ -6,11 +6,16 @@ import { Button, Input } from "@nextui-org/react";
 import { EyeSlashed } from "../../assets/svg/EyeSlashed";
 import { Eye } from "../../assets/svg/Eye";
 import { MailIcon } from "../../assets/svg/MailIcon";
-import { FaFingerprint as PasswordIcon} from "react-icons/fa";
+import { FaFingerprint as PasswordIcon } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 
 const CreateAccount = () => {
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
   const [isPasswordVisible, setPasswordVisible] = useState(false);
   const [isConfirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const navigate = useNavigate();
@@ -20,9 +25,6 @@ const CreateAccount = () => {
   const onSubmit = async (data) => {
     const { username, email, password } = data;
     const apiUrl = import.meta.env.VITE_API_URL;
-
-    console.log(data);
-    console.log(apiUrl);
 
     try {
       const response = await axios.post(`${apiUrl}/createAccount`, {
@@ -52,7 +54,13 @@ const CreateAccount = () => {
                 placeholder="Nombre de usuario"
                 labelPlacement="outside"
                 validationState={errors.username ? "invalid" : "valid"}
-                {...register("username", { required: "Este campo es obligatorio" })}
+                {...register("username", {
+                  required: "Este campo es obligatorio",
+                  pattern: {
+                    value: /^[a-zA-Z0-9* ]+$/,
+                    message: "Solo se permiten letras, números, * y espacios",
+                  },
+                })}
                 helperText={errors.username && errors.username.message}
                 startContent={
                   <CgProfile className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
@@ -67,7 +75,9 @@ const CreateAccount = () => {
                 label="Correo Electrónico"
                 placeholder="jhondoe@gmail.com"
                 labelPlacement="outside"
-                startContent={<MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />}
+                startContent={
+                  <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                }
                 validationState={errors.email ? "invalid" : "valid"}
                 {...register("email", {
                   required: "Este campo es obligatorio",
@@ -87,16 +97,29 @@ const CreateAccount = () => {
                 label="Contraseña"
                 placeholder="Escribe tu contraseña"
                 labelPlacement="outside"
-                startContent={<PasswordIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0 w-7" />}
+                startContent={
+                  <PasswordIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0 w-7" />
+                }
                 endContent={
-                  <button type="button" onClick={() => setPasswordVisible(!isPasswordVisible)} className="focus:outline-none">
-                    {isPasswordVisible ? <Eye className="text-2xl text-default-400" /> : <EyeSlashed className="text-2xl text-default-400" />}
+                  <button
+                    type="button"
+                    onClick={() => setPasswordVisible(!isPasswordVisible)}
+                    className="focus:outline-none"
+                  >
+                    {isPasswordVisible ? (
+                      <Eye className="text-2xl text-default-400" />
+                    ) : (
+                      <EyeSlashed className="text-2xl text-default-400" />
+                    )}
                   </button>
                 }
                 validationState={errors.password ? "invalid" : "valid"}
                 {...register("password", {
                   required: "Este campo es obligatorio",
-                  minLength: { value: 6, message: "La contraseña debe tener al menos 6 caracteres" },
+                  minLength: {
+                    value: 6,
+                    message: "La contraseña debe tener al menos 6 caracteres",
+                  },
                 })}
                 helperText={errors.password && errors.password.message}
               />
@@ -109,18 +132,33 @@ const CreateAccount = () => {
                 label="Confirmar Contraseña"
                 placeholder="Escribe nuevamente tu contraseña"
                 labelPlacement="outside"
-                startContent={<PasswordIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0 w-7" />}
+                startContent={
+                  <PasswordIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0 w-7" />
+                }
                 endContent={
-                  <button type="button" onClick={() => setConfirmPasswordVisible(!isConfirmPasswordVisible)} className="focus:outline-none">
-                    {isConfirmPasswordVisible ? <Eye className="text-2xl text-default-400" /> : <EyeSlashed className="text-2xl text-default-400" />}
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setConfirmPasswordVisible(!isConfirmPasswordVisible)
+                    }
+                    className="focus:outline-none"
+                  >
+                    {isConfirmPasswordVisible ? (
+                      <Eye className="text-2xl text-default-400" />
+                    ) : (
+                      <EyeSlashed className="text-2xl text-default-400" />
+                    )}
                   </button>
                 }
                 validationState={errors.confirmPassword ? "invalid" : "valid"}
                 {...register("confirmPassword", {
                   required: "Este campo es obligatorio",
-                  validate: (value) => value === password || "Las contraseñas no coinciden",
+                  validate: (value) =>
+                    value === password || "Las contraseñas no coinciden",
                 })}
-                helperText={errors.confirmPassword && errors.confirmPassword.message}
+                helperText={
+                  errors.confirmPassword && errors.confirmPassword.message
+                }
               />
             </div>
 

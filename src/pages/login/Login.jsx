@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form"; // Importa react-hook-form
-import axios from "axios"; // Importa axios
+import { useForm } from "react-hook-form";
+import axios from "axios";
 import { Button, Input } from "@nextui-org/react";
 import { EyeSlashed } from "../../assets/svg/EyeSlashed";
 import { Eye } from "../../assets/svg/Eye";
@@ -10,19 +10,21 @@ import { PasswordIcon } from "../../assets/svg/PasswordIcon";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [isPasswordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
   const apiUrl = import.meta.env.VITE_API_URL;
-  
+
   const onSubmit = async (data) => {
     try {
       const response = await axios.post(`${apiUrl}/login`, data);
 
       if (response.data.success) {
-
         localStorage.setItem("token", response.data.token);
-
         navigate("/statistics");
       } else {
         console.log(response.data.msg);
@@ -41,16 +43,32 @@ const Login = () => {
             <div className="mb-4">
               <Input
                 type="text"
-                label="UserName"
+                label="Nombre de Usuario"
                 validationState={errors.username ? "invalid" : "valid"}
-                placeholder="jhondoe@gmail.com"
+                placeholder="TuNombreDeUsuario"
                 labelPlacement="outside"
                 startContent={
                   <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
                 }
-                {...register("username", { required: "El nombre de usuaruio es requerido" })} // Usa react-hook-form
+                {...register("username", {
+                  required: "El nombre de usuario es requerido",
+                  minLength: {
+                    value: 3,
+                    message: "El nombre de usuario debe tener al menos 3 caracteres",
+                  },
+                  maxLength: {
+                    value: 15,
+                    message: "El nombre de usuario no puede tener más de 15 caracteres",
+                  },
+                  pattern: {
+                    value: /^[a-zA-Z0-9._]+$/,
+                    message: "El nombre de usuario solo puede contener letras, números, guiones bajos o puntos",
+                  },
+                })}
               />
-              {errors.username && <span className="text-red-500">{errors.username.message}</span>}
+              {errors.username && (
+                <span className="text-red-500">{errors.username.message}</span>
+              )}
             </div>
 
             <div className="mb-4">
@@ -76,9 +94,17 @@ const Login = () => {
                     )}
                   </button>
                 }
-                {...register("password", { required: "La contraseña es requerida" })} 
+                {...register("password", {
+                  required: "La contraseña es requerida",
+                  minLength: {
+                    value: 6,
+                    message: "La contraseña debe tener al menos 6 caracteres",
+                  },
+                })}
               />
-              {errors.password && <span className="text-red-500">{errors.password.message}</span>}
+              {errors.password && (
+                <span className="text-red-500">{errors.password.message}</span>
+              )}
             </div>
 
             <Button type="submit" color="primary" className="w-full py-2 px-4">
