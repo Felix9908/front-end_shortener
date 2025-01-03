@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { Button, Input } from "@nextui-org/react";
 import { EyeSlashed } from "../../assets/svg/EyeSlashed";
 import { Eye } from "../../assets/svg/Eye";
 import { MailIcon } from "../../assets/svg/MailIcon";
 import { PasswordIcon } from "../../assets/svg/PasswordIcon";
 import { useNavigate } from "react-router-dom";
+import { mutate } from "swr";
+import userService from "../../services/userService";
 
 const Login = () => {
   const {
@@ -17,20 +18,23 @@ const Login = () => {
   } = useForm();
   const [isPasswordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
-  const apiUrl = import.meta.env.VITE_API_URL;
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post(`${apiUrl}/login`, data);
+      // Llamada al servicio de login
+      const response = await userService.login(data);
+      mutate.apply("user", response.data.userData);
 
       if (response.data.success) {
-        localStorage.setItem("token", response.data.token);
-        navigate("/statistics");
+        console.log("Login exitoso");
+        navigate("/statistics"); 
       } else {
-        console.log(response.data.msg);
+        console.error(response.data.message);
+        alert(response.data.message);
       }
     } catch (error) {
       console.error("Error en la autenticación:", error);
+      alert("Error en la autenticación. Intenta nuevamente.");
     }
   };
 
