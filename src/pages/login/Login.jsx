@@ -7,8 +7,7 @@ import { Eye } from "../../assets/svg/Eye";
 import { MailIcon } from "../../assets/svg/MailIcon";
 import { PasswordIcon } from "../../assets/svg/PasswordIcon";
 import { useNavigate } from "react-router-dom";
-import { mutate } from "swr";
-import userService from "../../services/userService";
+import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
   const {
@@ -18,19 +17,15 @@ const Login = () => {
   } = useForm();
   const [isPasswordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
+  const { login, error } = useAuth();
 
   const onSubmit = async (data) => {
     try {
-      // Llamada al servicio de login
-      const response = await userService.login(data);
-      mutate.apply("user", response.data.userData);
-
-      if (response.data.success) {
-        console.log("Login exitoso");
+      const resopnse = await login(data);
+      if (resopnse) {
         navigate("/statistics"); 
       } else {
-        console.error(response.data.message);
-        alert(response.data.message);
+        console.error("Error en la autenticación:", error);
       }
     } catch (error) {
       console.error("Error en la autenticación:", error);

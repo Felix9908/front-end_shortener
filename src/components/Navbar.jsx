@@ -16,9 +16,10 @@ import { MoonIcon } from "../assets/svg/MoonIcon.jsx";
 import { SunIcon } from "../assets/svg/SunIcon.jsx";
 import { Link } from "react-router-dom";
 import ModalContext from "../Context/ModalContext.jsx";
-
+import useAuth from "../hooks/useAuth.js";
 export default function NavbarComponent() {
   const { onOpen } = useContext(ModalContext);
+  const { logout } = useAuth();
 
   return (
     <Navbar>
@@ -85,8 +86,12 @@ export default function NavbarComponent() {
             <DropdownItem key="system">Analíticas Globales</DropdownItem>
             <DropdownItem key="settings">Configurar perfil</DropdownItem>
             <DropdownItem key="help_and_feedback">Ayuda</DropdownItem>
-            <DropdownItem key="logout" color="danger">
-              Cerrar sesión
+            <DropdownItem
+              key="logout"
+              color="danger"
+              onClick={() => logout()}
+            >
+              Cerrar Sesión
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>

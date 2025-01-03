@@ -1,82 +1,103 @@
-import { client }    from './createRestApiClient';
+import { client } from "./createRestApiClient";
 import { addParams } from "./index";
 
-const base = "users/";
+const base = "auth/";
 const userService = () => ({
-    getUsers: ({filter, skip, take, order, role}) => client.request({
-      method: 'GET',
-      url: base + addParams({filter, skip, take, order, role})
+  getUsers: ({ filter, skip, take, order, role }) =>
+    client.request({
+      method: "GET",
+      url: base + addParams({ filter, skip, take, order, role }),
     }),
-    setUserRole: (id, role) => client.request({
-      method: 'PUT',
+  setUserRole: (id, role) =>
+    client.request({
+      method: "PUT",
       url: base + "role/" + id,
-      data: {role}
+      data: { role },
     }),
-    removeUserRole: (id, role) => client.request({
-      method: 'DELETE',
+  removeUserRole: (id, role) =>
+    client.request({
+      method: "DELETE",
       url: base + "role/" + id,
-      data: {role}
+      data: { role },
     }),
-    changePassword: (id, password) => client.request({
-      method: 'PATCH',
+  changePassword: (id, password) =>
+    client.request({
+      method: "PATCH",
       url: base + "change-password/" + id,
-      data: {password}
+      data: { password },
     }),
-    changeUserStatus: (id) => client.request({
-      method: 'DELETE',
-      url: base + id
+  changeUserStatus: (id) =>
+    client.request({
+      method: "DELETE",
+      url: base + id,
     }),
-    getCurrentUser: (token = "") => client.request({
-        method: 'GET',
-        url: base + "current"
-      }, token
+  getCurrentUser: (token = "") =>
+    client.request(
+      {
+        method: "GET",
+        url: base + "current",
+      },
+      token
     ),
-    getProfile: () => client.request({
-      method: 'GET',
-      url: base + "profile"
-    }),
-    findOne: (id) => client.request({method: 'GET', url: base + id}),
-    editProfile: (data) => client.request({
-      method: 'PUT',
+  getProfile: () =>
+    client.request({
+      method: "GET",
       url: base + "profile",
-      data
     }),
-    editCode: (data) => client.request({
-      method: 'PUT',
+  findOne: (id) => client.request({ method: "GET", url: base + id }),
+  editProfile: (data) =>
+    client.request({
+      method: "PUT",
+      url: base + "profile",
+      data,
+    }),
+  editCode: (data) =>
+    client.request({
+      method: "PUT",
       url: base + "code",
-      data
+      data,
     }),
-    editAvatar: (data) => client.request({
-      method: 'PUT',
+  editAvatar: (data) =>
+    client.request({
+      method: "PUT",
       url: base + "avatar",
-      data: {data}
+      data: { data },
     }),
-    getAvatar: () => client.request({
-      method: 'GET',
-      responseType: 'blob',
-      url: base + "avatar"
+  getAvatar: () =>
+    client.request({
+      method: "GET",
+      responseType: "blob",
+      url: base + "avatar",
     }),
-    addUser: (data) => client.request({
-      method: 'POST',
+  addUser: (data) =>
+    client.request({
+      method: "POST",
       url: base,
-      data
+      data,
     }),
-    addUserFromAdmin: (data) => client.request({
-      method: 'POST',
+  addUserFromAdmin: (data) =>
+    client.request({
+      method: "POST",
       url: base + "admin/add-user",
-      data
+      data,
     }),
-    updateUserFromAdmin: (data) => client.request({
-      method: 'PUT',
+  updateUserFromAdmin: (data) =>
+    client.request({
+      method: "PUT",
       url: base + "admin/update-user",
-      data
+      data,
     }),
-    login: (data) => client.request({
-      method: 'POST',
-      url: "login",
-      data
-    })
-  }
-)
+  login: (data) =>
+    client.request({
+      method: "POST",
+      url: base + "login",
+      data,
+    }),
+  logOut: () =>
+    client.request({
+      method: "PUT",
+      url: base + "logout",
+    }),
+});
 
-export default userService()
+export default userService();
