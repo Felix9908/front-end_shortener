@@ -1,20 +1,15 @@
+import { LoginPageVars } from "constants/ui/auth/LoginPageVars"
+
 const Login = () => {
   return (
     <div className="login-page">
-        <div className="container">
-            <div className="wrapper">
-                <input type="text" placeholder="Username"/>
-            </div>
+        <section className="left-secton">
+          <img src={LoginPageVars.bgPath} alt="" />
+        </section>
 
-            <div className="wrapper">
-                <input type="text" placeholder="asdasdas"/>
-            </div>
+        <section className="right-section">
 
-            <div className="wrapper">
-                <input type="text" placeholder="asdasdas"/>
-            </div>
-            
-        </div>
+        </section>
     </div>
   )
 }
