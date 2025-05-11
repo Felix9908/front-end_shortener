@@ -6,9 +6,13 @@ const Login = () => {
   const { t } = useTranslation("auth");
 
   return (
-    <div className="login-page">
+    <div className="login-page overflow-hidden">
         <section className="left-secton">
-          <img src={LoginPageVars.bgPath} alt="" />
+          <div className="absolute -left-10 rotate-y-180 lg:rotate-y-0">
+            <img src={LoginPageVars.bgPath} alt=""/>
+          </div>
+          
+
           <LanguageSwitcher/>
           <h1>{t("loginPage.title")}</h1>
         </section>
@@ -16,6 +20,8 @@ const Login = () => {
         <section className="right-section">
 
         </section>
+
+        <div className="fade"/>
     </div>
   )
 }
