@@ -1,0 +1,9 @@
+{
+  "loginPage": {
+    "title": "Iniciar sesión",
+    "subtitle": "Bienvenido de nuevo",
+    "button": "Entrar",
+    "welcomeMessage": "Gana dinero desde casa",
+    "welcomeMessageAccent": "HOY MISMO"
+  }
+}

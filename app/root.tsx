@@ -1,3 +1,5 @@
+import "../locales/config/i18next"
+
 import {
   isRouteErrorResponse,
   Links,

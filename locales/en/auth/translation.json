@@ -1,0 +1,9 @@
+{
+  "loginPage": {
+    "title": "Iniciar sesión",
+    "subtitle": "Bienvenido de nuevo",
+    "button": "Entrar",
+    "welcomeMessage": "Start earning from",
+    "welcomeMessageAccent": "YOUR HOUSE"
+  }
+}
