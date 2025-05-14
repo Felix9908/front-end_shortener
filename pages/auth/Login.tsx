@@ -24,8 +24,26 @@ const Login = () => {
           </div>
         </section>
 
-        <section className="right-section">
+        <section className="absolute flex flex-col min-h-screen w-full">
+          <div className="">
+            <h1>Iniciar sesion</h1>
 
+            <div>
+              <p>Iniciar con email</p>
+              <div>
+                <img src="" alt="" />
+                <input type="text" />
+                <button></button>
+                <div/>
+              </div>
+            </div>
+
+            <div>
+              <p>Continue with...</p>
+              {/*componentes de iniciar sesion */}
+              <p>Termofuse</p>
+            </div>
+          </div>
         </section>
 
     </div>

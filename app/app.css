@@ -50,7 +50,7 @@ html, body {
 
 @layer components {
   .login-page {
-    @apply flex lg:bg-[#160430] bg-[#240B48] min-h-screen overflow-hidden;
+    @apply flex relative lg:bg-[#160430] bg-[#240B48] min-h-screen overflow-hidden;
 
     .left-section {
       @apply flex flex-row;
