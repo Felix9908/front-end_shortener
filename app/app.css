@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+
 html, body {
   @apply bg-dark-200;
 }
@@ -35,6 +36,30 @@ html, body {
   --color-red-100: #ff543d;
 }
 
-@layer components {
 
+@layer utilities {
+  .mask-fade-4 {
+    -webkit-mask-image: radial-gradient(ellipse at center, black 70%, transparent 100%);
+    mask-image: radial-gradient(ellipse at center, black 70%, transparent 100%);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+  }
+}
+
+@layer components {
+  .login-page {
+    @apply flex lg:bg-[#160430] bg-[#240B48] min-h-screen overflow-hidden;
+
+    .left-section {
+      @apply flex flex-row;
+    }
+
+    .login-fade-bottom {
+      @apply absolute left-0 w-full h-[70px] top-0 lg:top-auto lg:bottom-0;
+      @apply bg-gradient-to-b from-black to-transparent;
+      @apply lg:bg-gradient-to-t lg:from-[#160430];
+    }
+  }
 }

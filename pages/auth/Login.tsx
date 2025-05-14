@@ -8,25 +8,26 @@ const Login = () => {
   return (
     <div className="login-page">
         <section className="left-secton">
-          <div className="absolute -left-10 rotate-y-180 lg:rotate-y-0">
-            <img src={LoginPageVars.bgPath} alt=""/>
+          <div className="relative min-w-screen">
+            <img src={LoginPageVars.bgPath} className="relative lg:-left-10 left-0 rotate-y-180 lg:rotate-y-0" alt=""/>
+            <div className="absolute w-full h-[150px] lg:h-[50px] bottom-0 left-0 bg-gradient-to-b from-transparent to-[#240B48] lg:to-[#160430]"/>
           </div>
           
-          <div className="absolute flex flex-col gap-2 lg:gap-5 bottom-35 left-15">
-          <LanguageSwitcher/>
+          <div className="absolute lg:flex hidden lg:visible flex-col gap-2 lg:gap-5 bottom-35 left-15">
+            <h1 className="text-white font-bold text-5xl">
+              {t("loginPage.welcomeMessage")}
+            </h1>
 
-            <h1 className="text-white font-bold text-5xl">{t("loginPage.welcomeMessage")}</h1>
-            <h1 className="bg-gradient-to-b from-[#501794] to-[#AE69FF] bg-clip-text text-transparent font-bold text-5xl">{t("loginPage.welcomeMessageAccent")}</h1>
+            <h1 className="bg-gradient-to-b from-[#501794] to-[#AE69FF] bg-clip-text text-transparent font-bold text-5xl">
+              {t("loginPage.welcomeMessageAccent")}
+            </h1>
           </div>
-
-          <h1>{t("loginPage.title")}</h1>
         </section>
 
         <section className="right-section">
 
         </section>
 
-        <div className="login-fade-bottom"/>
     </div>
   )
 }
