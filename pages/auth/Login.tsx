@@ -24,16 +24,22 @@ const Login = () => {
           </div>
         </section>
 
-        <section className="absolute flex flex-col min-h-screen w-full">
-          <div className="">
-            <h1>Iniciar sesion</h1>
+        <section className="absolute flex flex-row justify-center items-center min-h-screen right-50">
+          <div className="flex flex-col lg:p-10 p-5">
+            <h1 className="font-bold text-white text-5xl">Iniciar sesion</h1>
 
             <div>
-              <p>Iniciar con email</p>
+              <p className="text-white">Iniciar con email</p>
+              <LanguageSwitcher/>
               <div>
                 <img src="" alt="" />
-                <input type="text" />
-                <button></button>
+                <input
+                  type="text" 
+                  placeholder="Email"
+                  className="bg-[#261046] text-white rounded-lg pl-3 py-2 w-full mb-3"
+                  />
+                <button className="flex justify-center items-center w-full mb-3 rounded-xl text-white font-bold text-lg py-4 px-8 bg-gradient-to-r from-[#501794] to-[#3e70a1]">Iniciar sesion</button>
+                <div className="w-full bg-[#727272] h-[2px] mb-2 rounded-xl"/>
                 <div/>
               </div>
             </div>
